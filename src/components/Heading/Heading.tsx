@@ -1,25 +1,21 @@
+/** @jsxImportSource theme-ui */
+
 import React from 'react';
-import styled from '@emotion/styled';
-
-import { Box } from '@theme-ui/components';
-
-import { theme } from './../../theme';
+import { useThemeUI } from 'theme-ui';
 
 const Heading: React.FC<{
-	as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+	fontSize: string[] | string;
+	children: React.ReactNode;
 }> = props => {
 	return (
-		<Box
-			as={`${props.as}`}
+		<h1
 			sx={{
-				fontSize: [3, 5, theme.fontSizes[8]],
-				fontFamily: theme.fonts.heading,
+				fontSize: props.fontSize,
+				margin: 0,
 			}}>
 			{props.children}
-		</Box>
+		</h1>
 	);
 };
-
-const Text = styled.text({});
 
 export default Heading;

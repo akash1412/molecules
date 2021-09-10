@@ -7,8 +7,14 @@ const Tabs: FC<{
 	selected: number;
 	handleSelectTab: (e: any) => void;
 }> & {
-	Tab: any;
+	Tab: FC<{ label: string }>;
 } = props => {
+	const childElements = React.Children.toArray(props.children).map(
+		(el: any) => el.props
+	);
+
+	console.log(childElements);
+
 	return (
 		<Box
 			sx={{
@@ -30,13 +36,15 @@ const Tabs: FC<{
 			</Box>
 
 			<Box py='.8rem'>
-				{props.children && props.children[props.selected - 1].props.children}
+				{props.children && childElements[props.selected - 1].children}
 			</Box>
 		</Box>
 	);
 };
 
-const Tab = (props: any) => {
+const Tab: FC<{
+	label: string;
+}> = (props: any) => {
 	return (
 		<Box
 			as='li'
@@ -67,10 +75,10 @@ const Tab = (props: any) => {
 
 Tabs.Tab = Tab;
 
-Tab.propTypes = {
-	label: PropTypes.string,
-	tabIndex: PropTypes.number,
-	handleTabAction: PropTypes.func,
-};
+// Tab.propTypes = {
+// 	label: PropTypes.string,
+// 	tabIndex: PropTypes.number,
+// 	handleTabAction: PropTypes.func,
+// };
 
 export { Tabs };

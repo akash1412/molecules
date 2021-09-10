@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import Head from './Heading';
+import Heading from './Heading';
+import { Box } from 'theme-ui';
 
 export default {
 	title: 'Example/Heading',
@@ -18,6 +19,13 @@ export default {
 	],
 } as Meta;
 
-export const Heading = () => {
-	return <Head as='h1'>Heading</Head>;
+export const Default = () => {
+	return (
+		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+			<Heading fontSize='36px'>This is a Heading</Heading>
+			<Heading fontSize='24px'>This is a Heading</Heading>
+			<Heading fontSize='18px'>This is a Heading</Heading>
+			<Heading fontSize='14px'>This is a Heading</Heading>
+		</Box>
+	);
 };

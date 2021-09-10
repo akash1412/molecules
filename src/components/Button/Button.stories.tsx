@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta, Meta } from '@storybook/react';
 import { FiBell } from 'react-icons/fi';
-import Button from './Button';
+import { Button } from './Button';
 
 export default {
 	title: 'Example/Button',

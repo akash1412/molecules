@@ -1,5 +1,10 @@
 import { FC, ReactNode } from 'react';
-import { Box, Button, ButtonProps, useThemeUI } from 'theme-ui';
+import {
+	Box,
+	Button as ThemeUiButton,
+	ButtonProps,
+	useThemeUI,
+} from 'theme-ui';
 
 interface Props extends ButtonProps {
 	cursor?: 'pointer' | 'grab' | 'pointer';
@@ -12,11 +17,11 @@ interface Props extends ButtonProps {
 	loadingText?: string;
 }
 
-const ButtonCustom: FC<Props> = props => {
+const Button: FC<Props> = props => {
 	const { theme } = useThemeUI();
 
 	return (
-		<Button
+		<ThemeUiButton
 			{...props}
 			sx={{
 				width: props.height,
@@ -43,8 +48,8 @@ const ButtonCustom: FC<Props> = props => {
 				{props.lefttIcon || props.rightIcon}
 			</Box>
 			{props.isLoading ? props.loadingText : props.children}
-		</Button>
+		</ThemeUiButton>
 	);
 };
 
-export default ButtonCustom;
+export { Button };

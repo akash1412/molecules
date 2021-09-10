@@ -1,75 +1,53 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
+
 import React from 'react';
-// import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Box, Select, useThemeUI, Button, jsx } from 'theme-ui';
+import { Box, SelectProps, useThemeUI, jsx } from 'theme-ui';
 import styled from '@emotion/styled';
 
-interface Props {
-	width?: string;
-
-	color?: string;
-
-	bgColor?: string;
-
-	borderWidth?: string;
-
-	borderColor?: string;
-
-	borderStyle?: 'solid' | 'dotted';
-
-	border?: string;
-
+interface Props extends SelectProps {
+	value: any;
+	options?: { label: string; value: any }[];
+	handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 	placeholder?: string;
 }
 
-const CustomSelect: React.FC<Props> = () => {
+const CustomSelect: React.FC<Props> = props => {
+	const { theme } = useThemeUI();
+
+	const { options } = props;
+
 	return (
-		<Box as='select' sx={{ width: [null, null, '30%'], color: 'orange' }}>
-			<option>chicken</option>
-			<option>mutton</option>
-			<option>biryani</option>
-		</Box>
+		<select
+			multiple
+			value={props.value}
+			//@ts-ignore
+			onChange={props.handleChange}
+			sx={{
+				width: [null, null, '30%'],
+
+				p: '10px',
+				border: '2px',
+				borderStyle: 'solid',
+				borderColor: theme.colors?.primary,
+				'&:active': {
+					border: 'none',
+					outline: 'none',
+				},
+			}}>
+			<Option selected disabled>
+				{props.placeholder}
+			</Option>
+			{options?.map(option => (
+				<Option value={option.value}>{option.label}</Option>
+			))}
+		</select>
 	);
 };
 
+const Option = styled.option({
+	border: 'none',
+	padding: '10px',
+});
+
 export default CustomSelect;
-
-const Container = styled(Select)`
-	/* position: relative;
-	color: orange; */
-`;
-// const SelectStyles = styled.select`
-// 	width: 100%;
-
-// 	border: 2px solid #560bad;
-// 	background-color: #fffafa;
-// 	color: #000;
-// 	padding: 1em;
-// 	border-radius: 0.5em;
-// 	outline: none;
-// 	cursor: pointer;
-// 	font-size: 0.8em;
-// 	font-weight: 550;
-
-// 	/* remove the default dropdown icon */
-// 	appearance: none;
-// 	--webkit-appearance: none;
-// 	--moz-appearance: none;
-// 	text-indent: 1px;
-// 	text-overflow: '';
-// `;
-
-// const IconContainer = styled.span`
-// 	position: absolute;
-// 	top: 0;
-// 	right: 0;
-// 	width: 2em;
-// 	/* background-color: #000; */
-// 	pointer-events: none;
-
-// 	height: 100%;
-// 	display: grid;
-// 	place-items: center;
-// `;
