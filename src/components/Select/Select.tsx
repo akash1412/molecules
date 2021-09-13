@@ -19,27 +19,19 @@ const CustomSelect: React.FC<Props> = props => {
 
 	return (
 		<select
-			multiple
 			value={props.value}
-			//@ts-ignore
 			onChange={props.handleChange}
 			sx={{
-				width: [null, null, '30%'],
-
 				p: '10px',
 				border: '2px',
 				borderStyle: 'solid',
 				borderColor: theme.colors?.primary,
-				'&:active': {
-					border: 'none',
-					outline: 'none',
-				},
 			}}>
-			<Option selected disabled>
+			<option selected disabled>
 				{props.placeholder}
-			</Option>
+			</option>
 			{options?.map(option => (
-				<Option value={option.value}>{option.label}</Option>
+				<option value={option.value}>{option.label}</option>
 			))}
 		</select>
 	);

@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Box } from 'theme-ui';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 const Tabs: FC<{
@@ -10,11 +9,10 @@ const Tabs: FC<{
 	Tab: FC<{ label: string }>;
 } = props => {
 	const childElements = React.Children.toArray(props.children).map(
-		(el: any) => el.props
+		(element: any) => element.props
 	);
 
 	console.log(childElements);
-
 	return (
 		<Box
 			sx={{

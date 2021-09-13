@@ -18,43 +18,74 @@ export default {
 	],
 } as Meta;
 
+const items = [
+	{
+		name: 'Romelu Lukaku',
+		goals: 4,
+		assists: 1,
+		country: '🇧🇪',
+		image: 'https://twitter-avatar.now.sh/Romelu_lukaku9',
+	},
+	{
+		name: 'Harry Kane',
+		goals: 6,
+		assists: 0,
+		country: '🇬🇧',
+		image: 'https://twitter-avatar.now.sh/HKane',
+	},
+	{
+		name: 'Antoine Griezmann',
+		goals: 4,
+		assists: 2,
+		country: '🇫🇷',
+		image: 'https://twitter-avatar.now.sh/AntoGriezmann',
+	},
+	{
+		name: 'Ivan Perišić',
+		goals: 3,
+		assists: 1,
+		country: '🇭🇷',
+		image: 'https://twitter-avatar.now.sh/ivanperisic44',
+	},
+];
+
 export const Basic = () => {
+	const [data, setData] = useState(items);
+
 	return (
 		<Table
-			items={[
-				{
-					name: 'Harry Kane',
-					goals: 6,
-					assists: 0,
-					country: '🇬🇧',
-					image: 'https://twitter-avatar.now.sh/HKane',
-				},
-				{
-					name: 'Romelu Lukaku',
-					goals: 4,
-					assists: 1,
-					country: '🇧🇪',
-					image: 'https://twitter-avatar.now.sh/Romelu_lukaku9',
-				},
-				{
-					name: 'Antoine Griezmann',
-					goals: 4,
-					assists: 2,
-					country: '🇫🇷',
-					image: 'https://twitter-avatar.now.sh/AntoGriezmann',
-				},
-				{
-					name: 'Ivan Perišić',
-					goals: 3,
-					assists: 1,
-					country: '🇭🇷',
-					image: 'https://twitter-avatar.now.sh/ivanperisic44',
-				},
-			]}>
-			<Table.Column field='name' title='Name'></Table.Column>
-			<Table.Column field='country' title='Country'></Table.Column>
-			<Table.Column field='goals' title='Goals'></Table.Column>
-			<Table.Column field='assists' title='Assists'></Table.Column>
+			items={items}
+			sortOn='assists'
+			sortDirection='asc'
+			onRowClick={item => alert(item.name)}
+			comparator={(a, b) => {
+				return a.goals + a.assists - b.goals - b.assists;
+			}}>
+			<Table.Column field='name' title='Name' />
+			<Table.Column field='country' title='Country' />
+			<Table.Column field='goals' title='Goals' sortable />
+			<Table.Column field='assists' title='Assists' sortable />
+		</Table>
+	);
+};
+
+export const EmptyData = () => {
+	const [data, setData] = useState(items);
+
+	return (
+		<Table
+			items={[]}
+			sortOn='assists'
+			sortDirection='asc'
+			onRowClick={item => alert(item.name)}
+			comparator={(a, b) => {
+				return a.goals + a.assists - b.goals - b.assists;
+			}}
+			emptyMessage='No Data Available to render'>
+			<Table.Column field='name' title='Name' />
+			<Table.Column field='country' title='Country' />
+			<Table.Column field='goals' title='Goals' sortable />
+			<Table.Column field='assists' title='Assists' sortable />
 		</Table>
 	);
 };
