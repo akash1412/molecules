@@ -20,6 +20,8 @@ export default {
 
 export const Tooltip = () => (
 	<CustomTooltip content='this is a tooltip' placement='bottom'>
-		<FiBell />
+		<div>
+			<FiBell />
+		</div>
 	</CustomTooltip>
 );

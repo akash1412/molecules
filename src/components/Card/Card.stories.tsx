@@ -26,11 +26,13 @@ export const Default = () => {
 				src='https://res.cloudinary.com/dhqp2dd6b/image/upload/v1631522950/z5u6f2p40w7jhgemz9gh.jpg'
 				alt='sample'
 			/>
-			<Card.Title>Heading</Card.Title>
-			<Card.Text>lorem ipsum</Card.Text>
-			<Card.Action>
-				<Button>Go</Button>
-			</Card.Action>
+			<Card.Body>
+				<Card.Title>Heading</Card.Title>
+				<Card.Text>lorem ipsum</Card.Text>
+				<Card.Action>
+					<Button>Go</Button>
+				</Card.Action>
+			</Card.Body>
 		</Card>
 	);
 };

@@ -10,7 +10,8 @@
 
 .checkbox-container input[type='checkbox'] {
 	cursor: pointer;
-	opacity: 0.8;
+	opacity: 0;
+	visibility: hidden;
 	position: absolute;
 }
 
@@ -28,9 +29,9 @@
 	border: 0.05em solid #000;
 }
 
-.checkbox-container input[type='checkbox']:checked + label::before {
-	/* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpolyline points='1 6.5 4 9.5 11 2.5' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
-	background-size: 18px; */
+.checkbox-container > input[type='checkbox']::checked + label::before {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpolyline points='1 6.5 4 9.5 11 2.5' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+	background-size: 18px;
 
 	background-color: '#000';
 }

@@ -3,6 +3,7 @@
 import React from 'react';
 import { FC } from 'react';
 import Heading from '../Heading/Heading';
+import { useThemeUI } from 'theme-ui';
 
 interface ICardProps {
 	children: React.ReactNode;
@@ -22,6 +23,8 @@ const Card: React.FC<ICardProps> & {
 	Text: React.FC<{ children: React.ReactNode }>;
 	Action: React.FC<{ children: React.ReactNode }>;
 } = props => {
+	const { theme } = useThemeUI();
+	console.log(theme.sizes);
 	return (
 		<div
 			sx={{
@@ -30,6 +33,7 @@ const Card: React.FC<ICardProps> & {
 				flexDirection: 'column',
 				borderRadius: '4px',
 				overflow: 'hidden',
+				border: '1px solid #ccc',
 			}}>
 			{props.children}
 		</div>
@@ -45,12 +49,12 @@ const CardImage: React.FC<ICardImageProps> = props => {
 	);
 };
 
-const CardBody = (props: any) => {
-	return <div>{props.children}</div>;
+const CardBody: React.FC = props => {
+	return <div sx={{ p: '.5em' }}>{props.children}</div>;
 };
 
 const CardTitle: React.FC = props => {
-	return <Heading fontSize='2rem'>{props.children}</Heading>;
+	return <Heading>{props.children}</Heading>;
 };
 
 const CardText: React.FC<{ children: React.ReactNode }> = props => {

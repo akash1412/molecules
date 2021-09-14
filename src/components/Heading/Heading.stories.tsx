@@ -22,10 +22,12 @@ export default {
 export const Default = () => {
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column' }}>
-			<Heading fontSize='36px'>This is a Heading</Heading>
-			<Heading fontSize='24px'>This is a Heading</Heading>
-			<Heading fontSize='18px'>This is a Heading</Heading>
-			<Heading fontSize='14px'>This is a Heading</Heading>
+			<Heading as='h4' fontSize='3rem'>
+				This is a Heading
+			</Heading>
+			<Heading fontSize='2.5rem'>This is a Heading</Heading>
+			<Heading fontSize='1.5'>This is a Heading</Heading>
+			<Heading fontSize='1.2rem'>This is a Heading</Heading>
 		</Box>
 	);
 };

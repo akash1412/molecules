@@ -26,6 +26,7 @@ interface ITableProps {
 }
 
 interface IColumnProps {
+	children?: React.ReactNode;
 	field: string;
 	title: string;
 	width?: string;
@@ -49,11 +50,18 @@ const Table: React.FC<ITableProps> & {
 		(element: any) => element.props
 	);
 
+	console.log(columnProps);
 	const [tableData, setTableData] = React.useState(items);
 
 	const renderTableData = (item: any) => {
-		return columnProps.map(({ field }: any) => {
-			return <td>{item[field]}</td>;
+		return columnProps.map(({ field, children }: any) => {
+			console.log(children);
+			return (
+				<td>
+					{children}
+					{item[field]}
+				</td>
+			);
 		});
 	};
 
@@ -83,7 +91,9 @@ const Table: React.FC<ITableProps> & {
 };
 
 const Column: React.FC<IColumnProps> = props => {
-	const { field, title, sortable } = props;
+	const { field, title, sortable, children } = props;
+
+	console.log(children);
 
 	const { tableData, sortDirection, handleSort } = React.useContext(
 		TableContext

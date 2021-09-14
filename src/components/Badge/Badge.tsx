@@ -2,6 +2,8 @@
 
 import React from 'react';
 
-const Badge = () => {
-	return <div></div>;
+const Badge: React.FC = ({ children }) => {
+	return <span>{children}</span>;
 };
+
+export { Badge };
