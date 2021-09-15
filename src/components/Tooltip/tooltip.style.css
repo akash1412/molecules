@@ -1,0 +1,28 @@
+.tooltip_container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tooltip_trigger_el {
+	color: red;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tooltip_trigger_el:hover::before {
+	display: block;
+}
+
+.tooltip_trigger_el::before {
+	content: attr(data-content);
+	background-color: #000000;
+	color: #fff;
+	display: none;
+	padding: 0.5em;
+	width: max-content;
+	max-width: 200px;
+	text-align: center;
+}

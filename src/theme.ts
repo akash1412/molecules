@@ -61,5 +61,10 @@ export const theme = {
 		root: {
 			boxSizing: 'border-box',
 		},
+		button: {
+			borderRadius: '4px',
+			border: 'none',
+			outline: 'none',
+		},
 	},
 };

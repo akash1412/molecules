@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
+import { Avatar } from '../Avatar/Avatar';
 import { Table } from './Table';
 
 export default {
@@ -61,7 +62,9 @@ export const Basic = () => {
 			comparator={(a, b) => {
 				return a.goals + a.assists - b.goals - b.assists;
 			}}>
-			<Table.Column field='name' title='Name' />
+			<Table.Column field='name' title='Name' width='30%'>
+				<Avatar />
+			</Table.Column>
 			<Table.Column field='country' title='Country' />
 			<Table.Column field='goals' title='Goals' sortable />
 			<Table.Column field='assists' title='Assists' sortable />
@@ -70,8 +73,6 @@ export const Basic = () => {
 };
 
 export const EmptyData = () => {
-	const [data, setData] = useState(items);
-
 	return (
 		<Table
 			items={items}
@@ -94,10 +95,25 @@ export const EmptyData = () => {
 	);
 };
 
-// export const LoadingData =()=>{
-// 	return(
-// 		<Table>
-
-// 		</Table>
-// 	)
-// }
+export const LoadingState = () => {
+	return (
+		<Table
+			isLoading
+			items={items}
+			sortOn='assists'
+			sortDirection='asc'
+			onRowClick={item => alert(item.name)}
+			comparator={(a, b) => {
+				return a.goals + a.assists - b.goals - b.assists;
+			}}>
+			<Table.Column field='name' title='Name'>
+				player
+			</Table.Column>
+			<Table.Column field='country' title='Country'>
+				hfdjfjfjf
+			</Table.Column>
+			<Table.Column field='goals' title='Goals' sortable />
+			<Table.Column field='assists' title='Assists' sortable />
+		</Table>
+	);
+};

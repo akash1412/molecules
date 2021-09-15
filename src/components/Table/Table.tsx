@@ -1,14 +1,16 @@
 /** @jsxImportSource theme-ui */
 
+import { Spinner } from '@theme-ui/components';
 import React from 'react';
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
+import { BiReset } from 'react-icons/bi';
 
-type sortDirection = 'asc' | 'dsc';
+type sortDirection = 'asc' | 'dsc' | 'default';
 
 interface ITableInternalContext {
 	tableData: any[];
 	sortDirection: sortDirection | 'asc';
-	handleSort: (columnToSort: string) => void;
+	handleSort: (columnToSort: string, colSortDir: string) => void;
 }
 
 const TableContext = React.createContext<ITableInternalContext>(
@@ -23,6 +25,7 @@ interface ITableProps {
 	sortDirection?: sortDirection;
 	comparator?: (a: any, b: any) => void;
 	emptyMessage?: string;
+	isLoading?: boolean;
 }
 
 interface IColumnProps {
@@ -41,59 +44,122 @@ const Table: React.FC<ITableProps> & {
 		children,
 		onRowClick,
 		sort,
-		sortDirection = 'asc',
+		sortDirection = 'default',
 		sortOn,
 		emptyMessage,
+		isLoading,
 	} = props;
 
 	const columnProps = React.Children.toArray(children).map(
 		(element: any) => element.props
 	);
 
-	console.log(columnProps);
 	const [tableData, setTableData] = React.useState(items);
 
 	const renderTableData = (item: any) => {
-		return columnProps.map(({ field, children }: any) => {
-			console.log(children);
+		return columnProps.map(({ field, children, width = 'auto' }: any) => {
 			return (
-				<td>
-					{children}
-					{item[field]}
+				<td
+					sx={{
+						width: width,
+						padding: '8px',
+						textAlign: 'left',
+						overflowWrap: 'break-word',
+						borderTop: '1px solid rgba(217,217,217)',
+						verticalAlign: 'middle',
+					}}>
+					<div
+						sx={{
+							display: children ? 'flex' : 'block',
+							alignItems: children ? 'center' : 'stretch',
+						}}>
+						<span
+							sx={{
+								display: children ? 'block' : 'none',
+								width: '32px',
+								height: '32px',
+							}}>
+							{children}
+						</span>
+						<div
+							sx={{
+								ml: children && '12px',
+								fontWeight: '500',
+								lineHeight: 'inherit',
+							}}>
+							{item[field]}
+						</div>
+					</div>
 				</td>
 			);
 		});
 	};
 
-	const handleSort = (columnToSort: string) => {
+	const handleSort = (columnToSort: string, colSortDir: string) => {
 		const cloneData = [...tableData];
-
-		//@ts-ignore
-		setTableData([...cloneData.sort((d1, d2) => d1[sortOn] - d2[sortOn])]);
+		console.log(colSortDir);
+		if (sortOn) {
+			if (colSortDir === 'asc') {
+				setTableData([
+					...cloneData.sort(
+						(d1, d2) => d1[columnToSort || sortOn] - d2[columnToSort || sortOn]
+					),
+				]);
+			} else {
+				setTableData([
+					...cloneData.sort(
+						(d1, d2) => d2[columnToSort || sortOn] - d1[columnToSort || sortOn]
+					),
+				]);
+			}
+		}
 	};
 
 	return (
 		<TableContext.Provider value={{ tableData, sortDirection, handleSort }}>
-			<table sx={{ padding: '10px', border: '2px solid #000' }}>
-				<tr>{props.children}</tr>
-				{tableData.length === 0 && <EmptyMessage message={emptyMessage!} />}
-				{tableData.length > 0 &&
-					tableData.map((item: any) => (
-						<tr
-							sx={{ cursor: 'pointer' }}
-							onClick={() => onRowClick && onRowClick(item)}>
-							{renderTableData(item)}
-						</tr>
-					))}
+			<table cellSpacing='0' width='100%'>
+				<thead
+					sx={{
+						width: '100%',
+					}}>
+					<tr sx={{ borderCollapse: 'collapse', borderSpacing: 0 }}>
+						{children}
+					</tr>
+				</thead>
+
+				{tableData.length === 0 && !isLoading && (
+					<EmptyMessage message={emptyMessage!} />
+				)}
+				<tbody>
+					{tableData.length > 0 &&
+						!isLoading &&
+						tableData.map((item: any) => (
+							<tr
+								sx={{
+									cursor: onRowClick ? 'pointer' : 'initial',
+									'&:hover': {
+										transition: '.2s',
+										backgroundColor: 'rgba(217,217,217,.8)',
+									},
+								}}
+								onClick={() => onRowClick && onRowClick(item)}>
+								{renderTableData(item)}
+							</tr>
+						))}
+				</tbody>
+				{isLoading && (
+					<div
+						sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+						<Spinner />
+					</div>
+				)}
 			</table>
 		</TableContext.Provider>
 	);
 };
 
 const Column: React.FC<IColumnProps> = props => {
-	const { field, title, sortable, children } = props;
-
-	console.log(children);
+	const { field, title, sortable, width = 'auto' } = props;
 
 	const { tableData, sortDirection, handleSort } = React.useContext(
 		TableContext
@@ -104,10 +170,16 @@ const Column: React.FC<IColumnProps> = props => {
 	const handleColSort = () => {
 		if (!sortable && tableData.length > 0) return;
 
-		handleSort(field);
+		handleSort(field, colSortDir);
 
 		setColSortDir(curDir => {
-			return curDir === 'asc' ? 'dsc' : 'asc';
+			if (curDir === 'default') {
+				return 'asc';
+			} else if (curDir === 'asc') {
+				return 'asc';
+			} else {
+				return 'default';
+			}
 		});
 	};
 
@@ -116,17 +188,27 @@ const Column: React.FC<IColumnProps> = props => {
 			onClick={handleColSort}
 			field-name={field}
 			sx={{
-				display: 'inline-flex',
+				width: width,
+				textAlign: 'left',
+				p: '8px',
+				verticalAlign: 'bottom',
+				borderBottom: '1px solid rgba(217,217,217)',
 				alignItems: 'center',
 				cursor: sortable && tableData.length > 0 ? 'pointer' : 'text',
-				':hover': {
+				'&:hover': {
 					color: sortable && tableData.length > 0 ? 'blueviolet' : '#000',
 				},
 			}}>
 			{title}
 			{sortable && tableData.length > 0 && (
-				<span>
-					{colSortDir === 'asc' ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
+				<span sx={{ pl: '8px', mt: '2px' }}>
+					{colSortDir === 'asc' ? (
+						<BsArrowUpShort />
+					) : colSortDir === 'dsc' ? (
+						<BsArrowDownShort />
+					) : (
+						<BiReset />
+					)}
 				</span>
 			)}
 		</th>

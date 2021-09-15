@@ -7,24 +7,22 @@ const getFirstAndLastCharacter = (name: string) => {
 
 const Avatar: React.FC<{
 	size?: string;
+	minWidth?: string;
+	minHeight?: string;
 	name?: string;
 	src?: string;
 	bgColor?: string;
-}> = ({
-	size = '3em',
-	src = 'https://cdn.auth0.com/website/cosmos/avatar-user-default.svg',
-	name,
-}) => {
+}> = ({ size = '32px', src, name, minWidth = '32px', minHeight = '32px' }) => {
 	return (
 		<li
 			sx={{
-				p: '.2px',
 				listStyle: 'none',
 				borderRadius: '50%',
 				overflow: 'hidden',
 				width: size,
 				height: size,
-				boxSizing: 'border-box',
+				minWidth: minWidth,
+				minHeight: minHeight,
 			}}>
 			<span
 				sx={{
@@ -49,6 +47,7 @@ const Avatar: React.FC<{
 					}}>
 					{name && getFirstAndLastCharacter(name!)}
 				</div>
+
 				{src && (
 					<img
 						src={src}
@@ -57,6 +56,20 @@ const Avatar: React.FC<{
 							width: '100%',
 							height: '100%',
 							objectFit: 'cover',
+							zIndex: 1,
+						}}
+					/>
+				)}
+
+				{!src && !name && (
+					<img
+						src='https://cdn.auth0.com/website/cosmos/avatar-user-default.svg'
+						alt={name}
+						sx={{
+							width: '100%',
+							height: '100%',
+							objectFit: 'cover',
+							zIndex: 1,
 						}}
 					/>
 				)}

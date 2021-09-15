@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '../Button/Button';
 interface IConextProp {
 	activePanels: number[];
 	handlePanelClick: (num: number) => void;
@@ -61,7 +62,7 @@ const Accordion: React.FC<IAccordionProps> = props => {
 	return (
 		<AccordionInternalContext.Provider
 			value={{ activePanels, handlePanelClick }}>
-			<div sx={{ display: 'flex', flexDirection: 'column' }}>
+			<div sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
 				{React.Children.map(props.children, (el: any, idx) => {
 					return React.cloneElement(el, {
 						state: activePanels.includes(idx) ? 'open' : 'collapsed',
@@ -108,14 +109,16 @@ const AccordionButton = (props: any) => {
 	const { handlePanelClick } = useContext(AccordionInternalContext);
 
 	return (
-		<button onClick={() => !isPanelDisabled && handlePanelClick(panelIndex)}>
+		<Button
+			disabled={isPanelDisabled}
+			onClick={() => !isPanelDisabled && handlePanelClick(panelIndex)}>
 			{props.children}
-		</button>
+		</Button>
 	);
 };
 
 const AccordionPanel = (props: any) => {
-	return <div>{props.children}</div>;
+	return <div sx={{ transition: 'all .4s ease-in-out' }}>{props.children}</div>;
 };
 
 export { Accordion, AccordionItem, AccordionButton, AccordionPanel };

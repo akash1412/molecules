@@ -2,8 +2,9 @@
 
 import { FC, ReactNode } from 'react';
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-
+// import styled from '@emotion/styled';
+// import styled from '@emotion/styled/macro';
+import './tooltip.style.css';
 interface Props {
 	children: ReactNode;
 	placement?: 'left' | 'top' | 'right' | 'bottom';
@@ -15,20 +16,24 @@ const Tooltip: FC<Props> = props => {
 	const { children, placement = 'left', content, size } = props;
 
 	return (
-		<ToolTipStyles data-tooltip={content}>
-			<div className='popup-container'>{content}</div>
-			<div data-tooltip-trigger>{children}</div>
-		</ToolTipStyles>
+		<div data-tooltip={content} className='tooltip_container'>
+			<div
+				data-tooltip-trigger
+				data-content={content}
+				className='tooltip_trigger_el'>
+				{children}
+			</div>
+		</div>
 	);
 };
 
-const ToolTipStyles = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+// const ToolTipStyles = styled.div`
+// 	position: relative;
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
 
-	/* &::before {
+/* &::before {
 		content: attr(data-tooltip);
 		background-color: #000000;
 		color: #fff;
@@ -41,17 +46,25 @@ const ToolTipStyles = styled.div`
 		content: attr(data-tooltip);
 	} */
 
-	& > .popup-container {
-		position: absolute;
-		display: none;
-		top: -25px;
-		max-width: 250px;
-		width: max-content;
-	}
+// & > .popup-container {
+// 	position: absolute;
+// 	/* display: none; */
+// 	top: -25px;
+// 	max-width: 250px;
+// 	width: max-content;
+// }
+/* 
+	& > [data-tooltip-trigger]:hover + div {
+		 
+		color: red;
+	} */
+// `;
 
-	& > [data-tooltip-trigger]:hover + .popup-container {
-		display: block;
-	}
-`;
-
+// const ToolTipTriggerStyles = styled.div`;
+// 	&:hover {
+// 		${ToolTipStyles} {
+// 			color: red;
+// 		}
+// 	}
+// `;
 export default Tooltip;
