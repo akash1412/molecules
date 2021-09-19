@@ -1,13 +1,22 @@
+/** @jsxImportSource theme-ui */
 import { FC, ReactNode } from 'react';
+
 import {
 	Box,
 	Button as ThemeUiButton,
 	ButtonProps,
 	useThemeUI,
+	css,
 } from 'theme-ui';
+import {} from 'theme-ui/';
+type IVariant = 'primary' | 'secondary' | 'spotify' | 'google' | 'facebook';
 
 interface Props extends ButtonProps {
-	cursor?: 'pointer' | 'grab' | 'pointer';
+	variant?: IVariant;
+
+	/*  Cursor Prop  */
+	cursor?: 'pointer';
+
 	lefttIcon?: ReactNode;
 	rightIcon?: ReactNode;
 	iconSpacing?: string;
@@ -20,23 +29,25 @@ interface Props extends ButtonProps {
 const Button: FC<Props> = props => {
 	const { theme } = useThemeUI();
 
+	const { lefttIcon, rightIcon: RightIcon, variant = 'default' } = props;
+
+	console.log(variant);
+
 	return (
 		<ThemeUiButton
 			{...props}
 			sx={{
 				width: props.height,
 				height: props.height,
-				color: theme.colors?.text,
 				cursor: props.cursor || 'pointer',
-				backgroundColor: theme.colors?.primary,
-				borderRadius: 5,
+				borderRadius: variant === 'spotify' ? '100px' : '4px',
 				display: 'flex',
 				alignItems: 'center',
 				textAlign: 'center',
 				opacity: props.isLoading && '.8',
+				variant: 'buttons.'+variant,
 			}}>
 			<Box
-				as='span'
 				sx={{
 					display: props.lefttIcon || props.rightIcon ? 'block' : 'none',
 					order: props.rightIcon ? 1 : -1,
@@ -45,7 +56,7 @@ const Button: FC<Props> = props => {
 					marginRight:
 						props.lefttIcon && props.children && (props.iconSpacing || '.5em'),
 				}}>
-				{props.lefttIcon || props.rightIcon}
+				{lefttIcon}
 			</Box>
 			{props.isLoading ? props.loadingText : props.children}
 		</ThemeUiButton>

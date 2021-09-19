@@ -2,17 +2,32 @@ import { FC } from 'react';
 import { Box } from 'theme-ui';
 import React from 'react';
 
+interface ITabProps {
+	selected: number;
+	handleSelectTab: (e: any) => void;
+}
+
 const Tabs: FC<{
 	selected: number;
 	handleSelectTab: (e: any) => void;
 }> & {
 	Tab: FC<{ label: string }>;
 } = props => {
+
+	// const {selected=1,handleSelectTab} = props
+	
+	// const [_selected,_setSelected] =React.useState(selected)
+	
+    // const _handleSelectedTab=()=>{
+		 
+	// }
+
 	const childElements = React.Children.toArray(props.children).map(
 		(element: any) => element.props
 	);
 
-	console.log(childElements);
+
+
 	return (
 		<Box
 			sx={{
@@ -72,11 +87,5 @@ const Tab: FC<{
 };
 
 Tabs.Tab = Tab;
-
-// Tab.propTypes = {
-// 	label: PropTypes.string,
-// 	tabIndex: PropTypes.number,
-// 	handleTabAction: PropTypes.func,
-// };
 
 export { Tabs };

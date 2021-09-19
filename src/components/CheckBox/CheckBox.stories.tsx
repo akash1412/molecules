@@ -13,7 +13,3 @@ const Template: ComponentStory<typeof CheckBox> = args => (
 );
 
 export const Checkbox = Template.bind({});
-
-Checkbox.args = {
-	children: 'watch porn',
-};

@@ -1,10 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from 'react';
 
-const getFirstAndLastCharacter = (name: string) => {
-	return name.split(' ').map(el => el[0].toUpperCase());
-};
-
 const Avatar: React.FC<{
 	size?: string;
 	minWidth?: string;
@@ -31,50 +27,57 @@ const Avatar: React.FC<{
 					height: '100%',
 					display: 'block',
 				}}>
-				<div
-					role='img'
-					sx={{
-						position: 'absolute',
-						top: '0',
-						left: '0',
-						width: '100%',
-						height: '100%',
-						backgroundColor: 'primary',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						zIndex: -1,
-					}}>
-					{name && getFirstAndLastCharacter(name!)}
-				</div>
-
-				{src && (
-					<img
-						src={src}
-						alt={name}
-						sx={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-							zIndex: 1,
-						}}
-					/>
-				)}
+				<NamePlaceholder name={name || 'default'} />
+				{src && name && <Image src={src} alt={name} />}
 
 				{!src && !name && (
-					<img
+					<Image
 						src='https://cdn.auth0.com/website/cosmos/avatar-user-default.svg'
-						alt={name}
-						sx={{
-							width: '100%',
-							height: '100%',
-							objectFit: 'cover',
-							zIndex: 1,
-						}}
+						alt='default'
 					/>
 				)}
 			</span>
 		</li>
+	);
+};
+
+const Image = ({ src, alt }: { src: string; alt: string }) => {
+	return (
+		<img
+			src={src}
+			alt={alt}
+			sx={{
+				width: '100%',
+				height: '100%',
+				objectFit: 'cover',
+				zIndex: 1,
+			}}
+		/>
+	);
+};
+
+const getFirstAndLastCharacter = (name: string) => {
+	return name.split(' ').map(el => el[0].toUpperCase());
+};
+
+const NamePlaceholder = ({ name }: { name: string }) => {
+	return (
+		<div
+			role='img'
+			sx={{
+				position: 'absolute',
+				top: '0',
+				left: '0',
+				width: '100%',
+				height: '100%',
+				backgroundColor: 'avatar.bgColor',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				zIndex: -1,
+			}}>
+			{name && getFirstAndLastCharacter(name)}
+		</div>
 	);
 };
 

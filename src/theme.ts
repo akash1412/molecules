@@ -1,9 +1,43 @@
 export const theme = {
 	colors: {
 		text: '#000',
-		primary: '#007bff',
+		primary: '#03071e',
 		secondary: '#6c757d',
 		background: '#fff',
+
+		social: {
+			spotify: {
+				bg: '#1DB954',
+				text: '#000000;',
+			},
+			google: {
+				bg: '#ffffff',
+				text: '#000',
+			},
+			facebook: {
+				bg: '#4267B2',
+				text: '#fff',
+			},
+		},
+		avatar: {
+			bgColor: '#ffd166',
+		},
+		badges: {
+			default: 'rgb(125, 125, 125)',
+			information: 'rgb(59, 192, 242)',
+			success: 'rgb(115, 205, 31)',
+			warning: 'rgb(244, 156, 32)',
+			danger: 'rgb(209, 75, 73)',
+		},
+	},
+	avatar: {
+		sizes: {
+			xs: '24px',
+			sm: '32px',
+			md: '40px',
+			lg: '48px',
+			xl: '72px',
+		},
 	},
 	fonts: {
 		body:
@@ -61,10 +95,33 @@ export const theme = {
 		root: {
 			boxSizing: 'border-box',
 		},
-		button: {
-			borderRadius: '4px',
-			border: 'none',
-			outline: 'none',
+	},
+	text: {
+		heading: {
+			color: 'primary',
+		},
+	},
+	buttons: {
+		default: {
+			color: '#000',
+		},
+		primary: {
+			bg: 'primary',
+			color: '#fff',
+		},
+		secondary: {},
+		spotify: {
+			bg: 'social.spotify.bg',
+			color: 'social.spotify.text',
+		},
+		google: {
+			bg: 'social.google.bg',
+			color: 'social.google.text',
+			boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+		},
+		facebook: {
+			bg: 'social.facebook.bg',
+			color: 'social.facebook.text',
 		},
 	},
 };

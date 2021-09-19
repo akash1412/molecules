@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 // import styled from '@emotion/styled';
 // import styled from '@emotion/styled/macro';
 import './tooltip.style.css';
+import { Themed } from '@theme-ui/mdx';
 interface Props {
 	children: ReactNode;
 	placement?: 'left' | 'top' | 'right' | 'bottom';
@@ -24,6 +25,7 @@ const Tooltip: FC<Props> = props => {
 				{children}
 			</div>
 		</div>
+	 
 	);
 };
 

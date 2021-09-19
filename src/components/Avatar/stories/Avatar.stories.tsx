@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
-import { Avatar } from './Avatar';
-import Stack from './../Stack/Stack';
+import { Avatar } from '../Avatar';
+import Stack from '../../Stack/Stack';
 
 export default {
 	title: 'Example/Avatar',

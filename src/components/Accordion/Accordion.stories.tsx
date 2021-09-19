@@ -26,7 +26,7 @@ export default {
 export const Default = () => {
 	return (
 		<Accordion collapsable defaultIndex={[1]}>
-			<AccordionItem disabled>
+			<AccordionItem>
 				<AccordionButton>accordion one button</AccordionButton>
 				<AccordionPanel>accordion one panel</AccordionPanel>
 			</AccordionItem>
