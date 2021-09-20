@@ -21,9 +21,9 @@ export default {
 export const Default = () => {
 	return (
 		<Menu>
-			<Menu.Item>Mia Khalifa</Menu.Item>
-			<Menu.Item>Lana Rhoades</Menu.Item>
-			<Menu.Item>Alura Jenson</Menu.Item>
+			<Menu.Item>Sam</Menu.Item>
+			<Menu.Item>Daniel</Menu.Item>
+			<Menu.Item>Jones</Menu.Item>
 		</Menu>
 	);
 };

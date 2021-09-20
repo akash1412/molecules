@@ -1,4 +1,11 @@
 {
-	"extends": ["plugin:jsx-a11y/recommended"],
-	"plugins": ["jsx-a11y"]
+	"extends": [
+		"react-app",
+		"plugin:jsx-a11y/recommended",
+		"prettier",
+		"prettier/react",
+		"airbnb",
+		"plugin:import/typescript"
+	],
+	"plugins": ["jsx-a11y", "prettier"]
 }
