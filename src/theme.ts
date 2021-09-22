@@ -4,7 +4,6 @@ export const theme = {
 		primary: '#03071e',
 		secondary: '#e76f51',
 		background: '#fff',
-
 		social: {
 			spotify: {
 				bg: '#1DB954',
@@ -76,7 +75,7 @@ export const theme = {
 		body: 'normal',
 		caps: '0.2em',
 	},
-	border: [2, 4, 6, , 8, 10],
+
 	styles: {
 		root: {
 			boxSizing: 'border-box',

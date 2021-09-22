@@ -100,10 +100,10 @@ export const LoadingState = () => {
 				return a.goals + a.assists - b.goals - b.assists;
 			}}>
 			<Table.Column field='name' title='Name'>
-				player
+				
 			</Table.Column>
 			<Table.Column field='country' title='Country'>
-				hfdjfjfjf
+		
 			</Table.Column>
 			<Table.Column field='goals' title='Goals' sortable />
 			<Table.Column field='assists' title='Assists' sortable />

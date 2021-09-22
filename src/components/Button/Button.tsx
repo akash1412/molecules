@@ -43,7 +43,10 @@ const Button: FC<Props> = props => {
 			{...props}
 			sx={{
 				width: width,
+				//@ts-ignore
 				height: height || (theme?.buttons && theme.buttons.sizes[size]),
+				//@ts-ignore
+
 				padding: size && theme.buttons.padding[size],
 				cursor: 'pointer',
 				backgroundColor: bgColor,
