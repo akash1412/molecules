@@ -76,13 +76,12 @@ export const theme = {
 	},
 
 	styles: {
-		root: {
-			boxSizing: 'border-box',
-		},
-
-		accordion: {
-			border: '1px solid',
-		},
+		// root: {
+		// 	boxSizing: 'border-box',
+		// },
+		// accordion: {
+		// 	border: '1px solid',
+		// },
 	},
 	text: {
 		heading: {
