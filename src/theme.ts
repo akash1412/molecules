@@ -29,16 +29,15 @@ export const theme = {
 			danger: 'rgb(209, 75, 73)',
 		},
 	},
-	avatar: {
-		sizes: {
-			xs: '24px',
-			sm: '32px',
-			md: '40px',
-			lg: '48px',
-			xl: '72px',
-		},
-	},
-
+	// avatar: {
+	// 	sizes: {
+	// 		xs: '24px',
+	// 		sm: '32px',
+	// 		md: '40px',
+	// 		lg: '48px',
+	// 		xl: '72px',
+	// 	},
+	// },
 	fonts: {
 		body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
 		heading: 'Roboto, serif',
@@ -91,18 +90,18 @@ export const theme = {
 		},
 	},
 	buttons: {
-		sizes: {
-			xs: '24px',
-			sm: '32px',
-			md: '40px',
-			lg: '48px',
-		},
-		padding: {
-			xs: '8px',
-			sm: '12px',
-			md: '16px',
-			lg: '24px',
-		},
+		// sizes: {
+		// 	xs: '24px',
+		// 	sm: '32px',
+		// 	md: '40px',
+		// 	lg: '48px',
+		// },
+		// padding: {
+		// 	xs: '8px',
+		// 	sm: '12px',
+		// 	md: '16px',
+		// 	lg: '24px',
+		// },
 		default: {
 			color: '#fff',
 		},

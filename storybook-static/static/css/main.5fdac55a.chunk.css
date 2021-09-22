@@ -1,0 +1,43 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
+body {
+  margin: 0;
+  paddign:0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ 
+.tooltip_container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tooltip_trigger_el {
+	color: red;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tooltip_trigger_el:hover::before {
+	display: block;
+}
+
+.tooltip_trigger_el::before {
+	content: attr(data-content);
+	background-color: #000000;
+	color: #fff;
+	display: none;
+	padding: 0.5em;
+	width: -webkit-max-content;
+	width: -moz-max-content;
+	width: max-content;
+	max-width: 200px;
+	text-align: center;
+}
+
+
+/*# sourceMappingURL=main.5fdac55a.chunk.css.map*/

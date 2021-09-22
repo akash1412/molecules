@@ -18,11 +18,12 @@ const Avatar: React.FC<{
 		<li
 			sx={{
 				listStyle: 'none',
+
 				borderRadius: '50%',
 
 				overflow: 'hidden',
-				width: size && theme.avatar ? theme.avatar.sizes[size] : '32px',
-				height: size && theme.avatar ? theme.avatar.sizes[size] : '32px',
+				width: '32px',
+				height: '32px',
 				minWidth: minWidth,
 				minHeight: minHeight,
 			}}>
@@ -85,3 +86,6 @@ const NamePlaceholder = ({ name }: { name: string }) => {
 };
 
 export { Avatar };
+
+// size && theme.avatar ? theme.avatar.sizes[size]
+// size && theme.avatar ? theme.avatar.sizes[size]
