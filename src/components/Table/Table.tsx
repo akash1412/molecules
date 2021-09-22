@@ -2,18 +2,15 @@
 
 import { Spinner } from '@theme-ui/components';
 import React from 'react';
-import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs';
-import { BiReset } from 'react-icons/bi';
-
-type sortDirection = 'asc' | 'dsc' | 'default';
+import Tablecolumn from './components/Tablecolumn';
 
 interface ITableInternalContext {
 	tableData: any[];
-	sortDirection: sortDirection | 'asc';
+
 	handleSort: (columnToSort: string, colSortDir: string) => void;
 }
 
-const TableContext = React.createContext<ITableInternalContext>(
+export const TableContext = React.createContext<ITableInternalContext>(
 	{} as ITableInternalContext
 );
 interface ITableProps {
@@ -22,7 +19,6 @@ interface ITableProps {
 	onRowClick?: (item: any) => void;
 	sort?: boolean;
 	sortOn?: string;
-	sortDirection?: sortDirection;
 	comparator?: (a: any, b: any) => void;
 	emptyMessage?: string;
 	isLoading?: boolean;
@@ -39,22 +35,36 @@ interface IColumnProps {
 const Table: React.FC<ITableProps> & {
 	Column: React.FC<IColumnProps>;
 } = props => {
-	const {
-		items,
-		children,
-		onRowClick,
-		sort,
-		sortDirection = 'default',
-		sortOn,
-		emptyMessage,
-		isLoading,
-	} = props;
+	const { items, children, onRowClick, sortOn, emptyMessage, isLoading } =
+		props;
 
 	const columnProps = React.Children.toArray(children).map(
 		(element: any) => element.props
 	);
 
 	const [tableData, setTableData] = React.useState(items);
+
+	const handleSort = (columnToSort: string, colSortDir: string) => {
+		const cloneData = [...tableData];
+
+		if (sortOn) {
+			if (colSortDir === 'asc') {
+				setTableData([
+					...cloneData.sort(
+						(d1, d2) => d1[columnToSort || sortOn] - d2[columnToSort || sortOn]
+					),
+				]);
+			} else if (colSortDir === 'dsc') {
+				setTableData([
+					...cloneData.sort(
+						(d1, d2) => d2[columnToSort || sortOn] - d1[columnToSort || sortOn]
+					),
+				]);
+			} else {
+				setTableData(items);
+			}
+		}
+	};
 
 	const renderTableData = (item: any) => {
 		return columnProps.map(({ field, children, width = 'auto' }: any) => {
@@ -95,28 +105,8 @@ const Table: React.FC<ITableProps> & {
 		});
 	};
 
-	const handleSort = (columnToSort: string, colSortDir: string) => {
-		const cloneData = [...tableData];
-		console.log(colSortDir);
-		if (sortOn) {
-			if (colSortDir === 'asc') {
-				setTableData([
-					...cloneData.sort(
-						(d1, d2) => d1[columnToSort || sortOn] - d2[columnToSort || sortOn]
-					),
-				]);
-			} else {
-				setTableData([
-					...cloneData.sort(
-						(d1, d2) => d2[columnToSort || sortOn] - d1[columnToSort || sortOn]
-					),
-				]);
-			}
-		}
-	};
-
 	return (
-		<TableContext.Provider value={{ tableData, sortDirection, handleSort }}>
+		<TableContext.Provider value={{ tableData, handleSort }}>
 			<table cellSpacing='0' width='100%'>
 				<thead
 					sx={{
@@ -158,64 +148,7 @@ const Table: React.FC<ITableProps> & {
 	);
 };
 
-const Column: React.FC<IColumnProps> = props => {
-	const { field, title, sortable, width = 'auto' } = props;
-
-	const { tableData, sortDirection, handleSort } = React.useContext(
-		TableContext
-	);
-
-	const [colSortDir, setColSortDir] = React.useState(sortDirection);
-
-	const handleColSort = () => {
-		if (!sortable && tableData.length > 0) return;
-
-		handleSort(field, colSortDir);
-
-		setColSortDir(curDir => {
-			if (curDir === 'default') {
-				return 'asc';
-			} else if (curDir === 'asc') {
-				return 'asc';
-			} else {
-				return 'default';
-			}
-		});
-	};
-
-	return (
-		<th
-			onClick={handleColSort}
-			field-name={field}
-			sx={{
-				width: width,
-				textAlign: 'left',
-				p: '8px',
-				verticalAlign: 'bottom',
-				borderBottom: '1px solid rgba(217,217,217)',
-				alignItems: 'center',
-				cursor: sortable && tableData.length > 0 ? 'pointer' : 'text',
-				'&:hover': {
-					color: sortable && tableData.length > 0 ? 'blueviolet' : '#000',
-				},
-			}}>
-			{title}
-			{sortable && tableData.length > 0 && (
-				<span sx={{ pl: '8px', mt: '2px' }}>
-					{colSortDir === 'asc' ? (
-						<BsArrowUpShort />
-					) : colSortDir === 'dsc' ? (
-						<BsArrowDownShort />
-					) : (
-						<BiReset />
-					)}
-				</span>
-			)}
-		</th>
-	);
-};
-
-Table.Column = Column;
+Table.Column = Tablecolumn;
 
 const EmptyMessage: React.FC<{ message: string }> = ({ message }) => {
 	return <h1>{message}</h1>;

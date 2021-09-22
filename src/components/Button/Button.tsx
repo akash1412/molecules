@@ -1,65 +1,66 @@
 /** @jsxImportSource theme-ui */
 import { FC, ReactNode } from 'react';
 
-import {
-	Box,
-	Button as ThemeUiButton,
-	ButtonProps,
-	useThemeUI,
-	css,
-} from 'theme-ui';
-import {} from 'theme-ui/';
-type IVariant = 'primary' | 'secondary' | 'spotify' | 'google' | 'facebook';
+import { Button as ThemeUIButton, ButtonProps, useThemeUI } from 'theme-ui';
+import ButtonIcon from './components/ButtonIcon';
+
+type IBackgroundColorType = 'primary' | 'secondary';
+
+type IVariant = 'spotify' | 'google' | 'facebook';
+
+type ISize = 'xs' | 'sm' | 'md' | 'lg';
 
 interface Props extends ButtonProps {
 	variant?: IVariant;
-
-	/*  Cursor Prop  */
-	cursor?: 'pointer';
-
+	bgColor?: IBackgroundColorType;
 	lefttIcon?: ReactNode;
 	rightIcon?: ReactNode;
 	iconSpacing?: string;
 	width?: string | string[];
 	height?: string | string[];
+	size?: ISize;
 	isLoading?: boolean;
 	loadingText?: string;
+	onClick?: () => void;
 }
 
 const Button: FC<Props> = props => {
 	const { theme } = useThemeUI();
 
-	const { lefttIcon, rightIcon: RightIcon, variant = 'default' } = props;
-
-	console.log(variant);
+	const {
+		lefttIcon,
+		rightIcon,
+		iconSpacing,
+		variant = 'default',
+		size = 'md',
+		bgColor,
+		width,
+		height,
+	} = props;
 
 	return (
-		<ThemeUiButton
+		<ThemeUIButton
 			{...props}
 			sx={{
-				width: props.height,
-				height: props.height,
-				cursor: props.cursor || 'pointer',
+				width: width,
+				height: height || (theme?.buttons && theme.buttons.sizes[size]),
+				padding: size && theme.buttons.padding[size],
+				cursor: 'pointer',
+				backgroundColor: bgColor,
 				borderRadius: variant === 'spotify' ? '100px' : '4px',
 				display: 'flex',
 				alignItems: 'center',
 				textAlign: 'center',
 				opacity: props.isLoading && '.8',
-				variant: 'buttons.'+variant,
+				variant: 'buttons.' + variant,
 			}}>
-			<Box
-				sx={{
-					display: props.lefttIcon || props.rightIcon ? 'block' : 'none',
-					order: props.rightIcon ? 1 : -1,
-					marginLeft:
-						props.rightIcon && props.children && (props.iconSpacing || '.5em'),
-					marginRight:
-						props.lefttIcon && props.children && (props.iconSpacing || '.5em'),
-				}}>
-				{lefttIcon}
-			</Box>
+			<ButtonIcon
+				lefttIcon={lefttIcon}
+				rightIcon={rightIcon}
+				iconSpacing={iconSpacing || '.5em'}
+			/>
 			{props.isLoading ? props.loadingText : props.children}
-		</ThemeUiButton>
+		</ThemeUIButton>
 	);
 };
 

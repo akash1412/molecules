@@ -2,7 +2,7 @@ export const theme = {
 	colors: {
 		text: '#000',
 		primary: '#03071e',
-		secondary: '#6c757d',
+		secondary: '#e76f51',
 		background: '#fff',
 
 		social: {
@@ -39,19 +39,19 @@ export const theme = {
 			xl: '72px',
 		},
 	},
+
 	fonts: {
-		body:
-			'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+		body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
 		heading: 'Roboto, serif',
 		monospace: 'Menlo, monospace',
 	},
 	fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
 	sizes: {
-		xs: 5,
-		sm: 6,
-		md: 7,
-		lg: 8, // default size
-		xl: 8,
+		xs: '0.75rem',
+		sm: '0.875rem',
+		md: '1rem',
+		lg: '1.125rem', // default size
+		xl: '1.25rem',
 		'2xl': '1.5rem',
 		'3xl': '1.875rem',
 		'4xl': '2.25rem',
@@ -61,21 +61,7 @@ export const theme = {
 		'8xl': '6rem',
 		'9xl': '8rem',
 	},
-	// sizes: {
-	// 	xs: '0.75rem',
-	// 	sm: '0.875rem',
-	// 	md: '1rem',
-	// 	lg: '1.125rem', // default size
-	// 	xl: '1.25rem',
-	// 	'2xl': '1.5rem',
-	// 	'3xl': '1.875rem',
-	// 	'4xl': '2.25rem',
-	// 	'5xl': '3rem',
-	// 	'6xl': '3.75rem',
-	// 	'7xl': '4.5rem',
-	// 	'8xl': '6rem',
-	// 	'9xl': '8rem',
-	// },
+
 	fontWeights: {
 		body: 400,
 		heading: 700,
@@ -95,6 +81,10 @@ export const theme = {
 		root: {
 			boxSizing: 'border-box',
 		},
+
+		accordion: {
+			border: '1px solid',
+		},
 	},
 	text: {
 		heading: {
@@ -102,8 +92,20 @@ export const theme = {
 		},
 	},
 	buttons: {
+		sizes: {
+			xs: '24px',
+			sm: '32px',
+			md: '40px',
+			lg: '48px',
+		},
+		padding: {
+			xs: '8px',
+			sm: '12px',
+			md: '16px',
+			lg: '24px',
+		},
 		default: {
-			color: '#000',
+			color: '#fff',
 		},
 		primary: {
 			bg: 'primary',

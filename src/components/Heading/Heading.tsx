@@ -1,24 +1,12 @@
+/* eslint-disable react/jsx-pascal-case */
 /** @jsxImportSource theme-ui */
 
 import React from 'react';
 
 import { Themed } from 'theme-ui';
+import { useThemeUI } from 'theme-ui';
 
 type asType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-// type sizeType =
-// 	| 'xs '
-// 	| 'sm'
-// 	| 'md'
-// 	| 'lg'
-// 	| 'xl'
-// 	| '2xl'
-// 	| '3xl'
-// 	| '4xl'
-// 	| '5xl'
-// 	| '6xl'
-// 	| '7xl'
-// 	| '8xl'
-// 	| '9xl';
 
 const Heading: React.FC<{
 	/* 
@@ -39,7 +27,11 @@ const Heading: React.FC<{
 	return (
 		<Themed.h1
 			as={as}
-			sx={{ variant: 'text.heading', fontSize: fontSize, margin: 0 }}>
+			sx={{
+				variant: 'text.heading',
+				fontSize: fontSize,
+				margin: 0,
+			}}>
 			{children}
 		</Themed.h1>
 	);

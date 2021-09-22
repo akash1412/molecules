@@ -20,10 +20,10 @@ interface IStackProps {
 }
 
 const Stack: React.FC<IStackProps> = props => {
-	const { direction = 'row', ...styleProps } = props;
+	const { direction = 'row', spacing = '1em', ...styleProps } = props;
 
 	return (
-		<StackStyles direction={direction} {...styleProps}>
+		<StackStyles direction={direction} spacing={spacing} {...styleProps}>
 			{props.children}
 		</StackStyles>
 	);

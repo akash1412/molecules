@@ -1,7 +1,6 @@
 /** @jsxImportSource theme-ui */
 
 import React from 'react';
-import { FC } from 'react';
 import Heading from '../Heading/Heading';
 import { useThemeUI } from 'theme-ui';
 
@@ -16,13 +15,7 @@ interface ICardImageProps {
 	alt: string;
 }
 
-const Card: React.FC<ICardProps> & {
-	Image: React.FC<ICardImageProps>;
-	Body: React.FC;
-	Title: React.FC;
-	Text: React.FC<{ children: React.ReactNode }>;
-	Action: React.FC<{ children: React.ReactNode }>;
-} = props => {
+export const Card: React.FC<ICardProps> = props => {
 	const { theme } = useThemeUI();
 	console.log(theme.sizes);
 	return (
@@ -40,34 +33,29 @@ const Card: React.FC<ICardProps> & {
 	);
 };
 
-const CardImage: React.FC<ICardImageProps> = props => {
+export const CardImage: React.FC<ICardImageProps> = ({ alt, src }) => {
 	return (
 		<img
-			{...props}
+			alt={alt}
+			src={src}
 			sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
 		/>
 	);
 };
 
-const CardBody: React.FC = props => {
+export const CardBody: React.FC = props => {
 	return <div sx={{ p: '.5em' }}>{props.children}</div>;
 };
 
-const CardTitle: React.FC = props => {
-	return <Heading>{props.children}</Heading>;
+export const CardTitle: React.FC<{
+	fontSize?: string;
+}> = ({ children, fontSize = '1.2rem' }) => {
+	return <Heading fontSize={fontSize}>{children}</Heading>;
 };
 
-const CardText: React.FC<{ children: React.ReactNode }> = props => {
+export const CardText: React.FC<{ children: React.ReactNode }> = props => {
 	return <p>{props.children}</p>;
 };
-const CardAction: React.FC<{ children: React.ReactNode }> = props => {
+export const CardAction: React.FC<{ children: React.ReactNode }> = props => {
 	return <div>{props.children}</div>;
 };
-
-Card.Image = CardImage;
-Card.Body = CardBody;
-Card.Title = CardTitle;
-Card.Action = CardAction;
-Card.Text = CardText;
-
-export { Card };

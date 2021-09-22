@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import Heading from './Heading';
+import Heading from '../Heading';
 import { Box } from 'theme-ui';
-import Stack from './../Stack/Stack';
+import Stack from '../../Stack/Stack';
 
 export default {
 	title: 'Example/Heading',
@@ -27,6 +27,7 @@ export const Default = () => {
 				This is a Heading
 			</Heading>
 			<Heading fontSize='2.5rem'>This is a Heading</Heading>
+			<Heading fontSize='2rem'>This is a Heading</Heading>
 			<Heading fontSize='1.5'>This is a Heading</Heading>
 			<Heading fontSize='1.2rem'>This is a Heading</Heading>
 		</Stack>

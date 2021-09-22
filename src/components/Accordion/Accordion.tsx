@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 interface IConextProp {
 	activePanels: number[];
 	handlePanelClick: (num: number) => void;
@@ -13,17 +14,41 @@ const AccordionInternalContext = React.createContext<IConextProp>(
 
 interface IAccordionProps {
 	children: React.ReactNode;
+
+	/* 
+	 default Index refers to active panel,
+	 
+	 it can both sigle & array values.
+	 
+	 for ex:-if defaultIndex=1 , then first panel will be active
+
+	*/
 	defaultIndex?: number | number[];
+
+	/* 
+	 collapsable takes a boolean value, 
+
+	 setting it true,we can toogle any panel
+	*/
 	collapsable?: boolean;
+
+	/* 
+	 on setting multiple to true, 
+	 
+	 we can open multiple panels
+	
+	 */
 	multiple?: boolean;
+
+	/* 
+	[default behaviour]: only one panel can be active a single time
+	
+	*/
 }
 
-const Accordion: React.FC<IAccordionProps> = ({
-	children,
-	defaultIndex,
-	collapsable,
-	multiple,
-}) => {
+const Accordion: React.FC<IAccordionProps> = props => {
+	const { children, defaultIndex, collapsable, multiple } = props;
+
 	const [activePanels, setActivePanels] = React.useState((): number[] => {
 		switch (true) {
 			case collapsable:
@@ -111,21 +136,31 @@ AccordionItem.prototype = {
 };
 
 const AccordionButton = (props: any) => {
-	const { panelIndex, isPanelDisabled } = props;
+	const { panelIndex, isPanelDisabled, panelState } = props;
 	const { handlePanelClick } = useContext(AccordionInternalContext);
 
 	return (
 		<Button
-			sx={{ variant: 'buttons.spotify' }}
+			sx={{ display: 'flex', borderRadius: '0' }}
 			disabled={isPanelDisabled}
 			onClick={() => !isPanelDisabled && handlePanelClick(panelIndex)}>
 			{props.children}
+			<span sx={{ ml: 'auto' }}>
+				{panelState === 'open' ? (
+					<FiChevronUp color='#fff' />
+				) : (
+					<FiChevronDown color='#fff' />
+				)}
+			</span>
 		</Button>
 	);
 };
 
 const AccordionPanel = (props: any) => {
-	return <div sx={{ transition: 'all .4s ease-in-out' }}>{props.children}</div>;
+	const { panelState } = props;
+
+	console.log(panelState);
+	return <div sx={{ p: '1.2rem 1.6rem' }}>{props.children}</div>;
 };
 
 export { Accordion, AccordionItem, AccordionButton, AccordionPanel };

@@ -18,9 +18,19 @@ export default {
 	],
 } as Meta;
 
-export const Default = () => {
+export const HStack = () => {
 	return (
-		<Stack>
+		<Stack direction='column'>
+			<Button>button 1</Button>
+			<Button>button 1</Button>
+			<Button>button 1</Button>
+		</Stack>
+	);
+};
+
+export const VStack = () => {
+	return (
+		<Stack direction='row'>
 			<Button>button 1</Button>
 			<Button>button 1</Button>
 			<Button>button 1</Button>

@@ -1,22 +1,28 @@
 /** @jsxImportSource theme-ui */
 import React from 'react';
+import { useThemeUI } from 'theme-ui';
+
+type ISize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 const Avatar: React.FC<{
-	size?: string;
+	size?: ISize;
 	minWidth?: string;
 	minHeight?: string;
-	name?: string;
+	initials?: string;
 	src?: string;
 	bgColor?: string;
-}> = ({ size = '32px', src, name, minWidth = '32px', minHeight = '32px' }) => {
+}> = ({ size, src, initials, minWidth, minHeight }) => {
+	const { theme } = useThemeUI();
+
 	return (
 		<li
 			sx={{
 				listStyle: 'none',
 				borderRadius: '50%',
+
 				overflow: 'hidden',
-				width: size,
-				height: size,
+				width: size && theme.avatar ? theme.avatar.sizes[size] : '32px',
+				height: size && theme.avatar ? theme.avatar.sizes[size] : '32px',
 				minWidth: minWidth,
 				minHeight: minHeight,
 			}}>
@@ -27,10 +33,10 @@ const Avatar: React.FC<{
 					height: '100%',
 					display: 'block',
 				}}>
-				<NamePlaceholder name={name || 'default'} />
-				{src && name && <Image src={src} alt={name} />}
+				<NamePlaceholder name={initials || 'default'} />
+				{src && initials && <Image src={src} alt={initials} />}
 
-				{!src && !name && (
+				{!src && !initials && (
 					<Image
 						src='https://cdn.auth0.com/website/cosmos/avatar-user-default.svg'
 						alt='default'
@@ -56,10 +62,6 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
 	);
 };
 
-const getFirstAndLastCharacter = (name: string) => {
-	return name.split(' ').map(el => el[0].toUpperCase());
-};
-
 const NamePlaceholder = ({ name }: { name: string }) => {
 	return (
 		<div
@@ -75,8 +77,9 @@ const NamePlaceholder = ({ name }: { name: string }) => {
 				alignItems: 'center',
 				justifyContent: 'center',
 				zIndex: -1,
+				fontSize: '100%',
 			}}>
-			{name && getFirstAndLastCharacter(name)}
+			{name}
 		</div>
 	);
 };

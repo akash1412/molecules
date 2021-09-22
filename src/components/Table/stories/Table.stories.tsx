@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import { Avatar } from '../Avatar/Avatar';
-import { Table } from './Table';
+import { Avatar } from '../../Avatar/Avatar';
+import { Table } from '../Table';
 
 export default {
 	title: 'Example/Table',
@@ -57,7 +57,6 @@ export const Basic = () => {
 		<Table
 			items={items}
 			sortOn='assists'
-			sortDirection='asc'
 			onRowClick={item => alert(item.name)}
 			comparator={(a, b) => {
 				return a.goals + a.assists - b.goals - b.assists;
@@ -77,18 +76,13 @@ export const EmptyData = () => {
 		<Table
 			items={items}
 			sortOn='assists'
-			sortDirection='asc'
 			onRowClick={item => alert(item.name)}
 			comparator={(a, b) => {
 				return a.goals + a.assists - b.goals - b.assists;
 			}}
 			emptyMessage='No Data Available to render'>
-			<Table.Column field='name' title='Name'>
-				player
-			</Table.Column>
-			<Table.Column field='country' title='Country'>
-				hfdjfjfjf
-			</Table.Column>
+			<Table.Column field='name' title='Name'></Table.Column>
+			<Table.Column field='country' title='Country'></Table.Column>
 			<Table.Column field='goals' title='Goals' sortable />
 			<Table.Column field='assists' title='Assists' sortable />
 		</Table>
@@ -101,7 +95,6 @@ export const LoadingState = () => {
 			isLoading
 			items={items}
 			sortOn='assists'
-			sortDirection='asc'
 			onRowClick={item => alert(item.name)}
 			comparator={(a, b) => {
 				return a.goals + a.assists - b.goals - b.assists;

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import { Tabs } from './Tab';
+import { Tabs } from '../Tab';
 
 export default {
 	title: 'Example/Tabs',

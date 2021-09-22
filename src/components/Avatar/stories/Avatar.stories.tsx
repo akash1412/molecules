@@ -28,13 +28,35 @@ export const WithAvatar = () => {
 		<Stack direction='column' spacing='2em'>
 			<Avatar
 				src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&h=200&fit=crop&crop=faces&s=707b9c33066bf8808c934c8ab394dff6'
-				name='Sarah James'
+				initials='SJ'
 			/>
 			<Avatar />
 		</Stack>
 	);
 };
 
+export const Sizes = () => {
+	return (
+		<Stack>
+			<Avatar
+				src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&h=200&fit=crop&crop=faces&s=707b9c33066bf8808c934c8ab394dff6'
+				size='md'
+				initials='JJ'
+			/>
+			<Avatar
+				src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&h=200&fit=crop&crop=faces&s=707b9c33066bf8808c934c8ab394dff6'
+				size='lg'
+				initials='SJ'
+			/>
+			<Avatar
+				src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&h=200&fit=crop&crop=faces&s=707b9c33066bf8808c934c8ab394dff6'
+				size='xl'
+				initials='AR'
+			/>
+		</Stack>
+	);
+};
+
 export const WithNamePlaceholder = () => {
-	return <Avatar name='Sarah James' />;
+	return <Avatar initials='LB' />;
 };

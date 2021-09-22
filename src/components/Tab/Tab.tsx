@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import { FC } from 'react';
 import { Box } from 'theme-ui';
 import React from 'react';
@@ -7,26 +9,12 @@ interface ITabProps {
 	handleSelectTab: (e: any) => void;
 }
 
-const Tabs: FC<{
-	selected: number;
-	handleSelectTab: (e: any) => void;
-}> & {
+const Tabs: FC<ITabProps> & {
 	Tab: FC<{ label: string }>;
 } = props => {
-
-	// const {selected=1,handleSelectTab} = props
-	
-	// const [_selected,_setSelected] =React.useState(selected)
-	
-    // const _handleSelectedTab=()=>{
-		 
-	// }
-
 	const childElements = React.Children.toArray(props.children).map(
 		(element: any) => element.props
 	);
-
-
 
 	return (
 		<Box
@@ -38,13 +26,11 @@ const Tabs: FC<{
 			}}>
 			<Box sx={{ display: 'flex', borderBottom: '1px solid #ccc' }}>
 				{React.Children.map(props.children, (el: any, idx) => {
-					const newElement = React.cloneElement(el, {
+					return React.cloneElement(el, {
 						tabIndex: idx + 1,
 						isActive: props.selected,
 						handleSelectTab: props.handleSelectTab,
 					});
-
-					return newElement;
 				})}
 			</Box>
 
@@ -59,20 +45,20 @@ const Tab: FC<{
 	label: string;
 }> = (props: any) => {
 	return (
-		<Box
-			as='li'
+		<li
 			{...props}
-			paddingY='1.2rem'
-			css={{
+			sx={{
 				marginRight: '12px',
 				listStyle: 'none',
-				color: props.isActive === props.tabIndex ? '#F3f' : '#243',
-				borderBottom: props.isActive === props.tabIndex ? '1px solid #F3f' : '',
+				color: props.isActive === props.tabIndex ? 'secondary' : 'primary',
+				borderBottom:
+					props.isActive === props.tabIndex ? '1px solid secondary' : '',
 			}}>
 			<Box
 				as='button'
 				onClick={() => props.handleSelectTab(props.tabIndex)}
-				css={{
+				sx={{
+					padding: '1.2rem 0',
 					fontWeight: 'bold',
 					fontSize: 'inherit',
 					color: 'inherit',
@@ -82,7 +68,7 @@ const Tab: FC<{
 				}}>
 				{props.label}
 			</Box>
-		</Box>
+		</li>
 	);
 };
 

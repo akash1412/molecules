@@ -6,9 +6,9 @@ import {
 	ModalContent,
 	ModalBody,
 	ModalFooter,
-} from './Modal';
+} from '../Modal';
 import { Box } from 'theme-ui';
-import { Button } from '../Button/Button';
+import { Button } from '../../Button/Button';
 
 export default {
 	title: 'Example/Modal',
@@ -35,7 +35,7 @@ export const Default = () => {
 
 	return (
 		<Box>
-			{!isOpen && <Button onClick={() => setOpen(true)}>Open Modal</Button>}
+			<Button onClick={() => setOpen(true)}>Open Modal</Button>
 			<Modal isOpen={isOpen} onClose={handleModalClose}>
 				<ModalOverlay />
 

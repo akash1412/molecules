@@ -1,5 +1,6 @@
-import { Box } from '@theme-ui/components';
+/** @jsxImportSource theme-ui */
 import React from 'react';
+import { Box } from '@theme-ui/components';
 import { Button } from '../Button/Button';
 import Heading from '../Heading/Heading';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -7,6 +8,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 interface IModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+}
+
+interface IModalOverlayProps {
+	onClick?: () => void;
 }
 
 const ModalContext = React.createContext({} as IModalProps);
@@ -23,9 +28,9 @@ export const Modal: React.FC<IModalProps> = props => {
 	);
 };
 
-export const ModalOverlay = () => {
+export const ModalOverlay: React.FC<IModalOverlayProps> = ({ onClick }) => {
 	return (
-		<Box
+		<div
 			sx={{
 				width: '100vw',
 				height: '100%',
@@ -34,9 +39,10 @@ export const ModalOverlay = () => {
 				left: 0,
 				backgroundColor: 'rgba(0,0,0,0.4)',
 				zIndex: '1',
-			}}>
+			}}
+			onClick={onClick}>
 			{' '}
-		</Box>
+		</div>
 	);
 };
 
@@ -49,7 +55,7 @@ export const ModalContent: React.FC<IModalContent> = props => {
 	const { onClose } = React.useContext(ModalContext);
 
 	return (
-		<Box
+		<div
 			sx={{
 				top: 5,
 				left: 0,
@@ -59,7 +65,7 @@ export const ModalContent: React.FC<IModalContent> = props => {
 				display: 'flex',
 				justifyContent: 'center',
 			}}>
-			<Box
+			<div
 				sx={{
 					borderRadius: '4px',
 					backgroundColor: '#fff',
@@ -68,7 +74,7 @@ export const ModalContent: React.FC<IModalContent> = props => {
 					display: 'flex',
 					flexDirection: 'column',
 				}}>
-				<Box
+				<div
 					sx={{
 						display: 'flex',
 						justifyContent: 'space-between',
@@ -78,10 +84,10 @@ export const ModalContent: React.FC<IModalContent> = props => {
 					<Button onClick={onClose}>
 						<AiOutlineClose />
 					</Button>
-				</Box>
+				</div>
 				{props.children}
-			</Box>
-		</Box>
+			</div>
+		</div>
 	);
 };
 
